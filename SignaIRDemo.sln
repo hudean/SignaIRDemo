@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30709.132
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignaIRDemo", "SignaIRDemo\SignaIRDemo.csproj", "{C42BF522-2EDE-4D3C-9995-0622E920CE12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignaIRDemoTwo", "SignaIRDemoTwo\SignaIRDemoTwo.csproj", "{C63F40E2-74C4-485A-B982-9A4AE4B53D74}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C42BF522-2EDE-4D3C-9995-0622E920CE12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C42BF522-2EDE-4D3C-9995-0622E920CE12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C42BF522-2EDE-4D3C-9995-0622E920CE12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C42BF522-2EDE-4D3C-9995-0622E920CE12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C63F40E2-74C4-485A-B982-9A4AE4B53D74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C63F40E2-74C4-485A-B982-9A4AE4B53D74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C63F40E2-74C4-485A-B982-9A4AE4B53D74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C63F40E2-74C4-485A-B982-9A4AE4B53D74}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5447EE59-BB88-466D-BD92-BD91ABCEB38A}
+	EndGlobalSection
+EndGlobal

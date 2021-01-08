@@ -1,0 +1,41 @@
+﻿<div>
+    <button id="btnStart" type="button">开始Polling</button>
+    <span id="result" style="color:red;font-weight:bolder;">
+
+    </span>
+</div>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    pollwithTimeout = (url, options, timeout = 9000) => {
+        return Promise.race([fetch(url, options), new Promise((_, reject) =>
+            setTimeout(() => reject(new Error('timeout')), timeout)
+        )]);
+    };
+    //pollWithTimeout方法使用了race, 如果请求后超过9秒没有响应, 那么就返回超时错误.
+
+    //poll里面, 如果请求返回的结果是200, 那么就更新UI.但是如果没有finished标志, 就继续发出请求.
+    function poll(id) {
+        pollwithTimeout('/DemoTest/LongPollingTest_GetCount?id='+id)
+            .then( response => {
+                if (response.status === 200) {
+                    return response.json().then(j => {
+                        const resultDiv = document.getElementById("result");
+                        resultDiv.innerHTML = j.count;
+                        if (!j.finished) {
+                            poll(id);
+                        }
+
+                    })
+                }
+                ;
+            }).catch(response=>poll(id));
+    };
+
+
+    $(function () {
+
+        $("#btnStart").click(function () {
+            poll(123);
+        });
+    });
+</script>

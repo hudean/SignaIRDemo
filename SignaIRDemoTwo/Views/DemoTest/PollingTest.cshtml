@@ -1,0 +1,35 @@
+﻿<div>
+    <button id="btnStart" type="button">开始Polling</button>
+    <span id="result" style="color:red;font-weight:bolder;">
+
+    </span>
+</div>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    var intervalId;
+    function poll(id) {
+        fetch('/DemoTest/PollingTest_GetCount?id='+id)
+            .then(function (response) {
+                if (response.status === 200) {
+                    return response.json().then(j => {
+                        const resultDiv = document.getElementById("result");
+                        resultDiv.innerHTML = j.count;
+                        if (j.finished) {
+                            clearInterval(intervalId);
+                            resultDiv.innerHTML = j.count + ",已结束";
+                        }
+
+                    })
+                }
+                ;
+            });
+    }
+
+
+    $(function () {
+
+        $("#btnStart").click(function () {
+            intervalId = setInterval(poll, 3000, 8)
+        });
+    });
+</script>

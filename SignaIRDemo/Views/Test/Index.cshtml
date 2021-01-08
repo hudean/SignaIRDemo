@@ -1,0 +1,130 @@
+﻿@{
+    ViewData["Title"] = "Test Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Test</h1>
+    <div>
+        <button id="btn" type="submit">开始Polling</button>
+        结果<span id="result" style="color:red;font-weight:bolder"></span>
+    </div>
+
+</div>
+<script type="text/javascript">
+//import { error } from "jquery";
+
+
+    /******************************************Polling***********************************************************************/
+    // Polling Start
+
+    //let intervalId;
+    //poll = (id) => {
+    //    fetch('/Test/Get/' + id)
+    //        .then(response => {
+    //            if (response.status == 200) {
+    //                response.json().then(j => {
+    //                    const resultDiv = document.getElementById("result");
+    //                    resultDiv.innerHTML = j.count;
+    //                    if (j.finished) {
+    //                        clearInterval(intervalId);
+    //                        resultDiv.innerHTML = j.count+" ,已结束";
+    //                    }
+
+    //                })
+    //            }
+
+    //        })
+
+    //};
+    //document.getElementById("btn").addEventListener("click", e => {
+    //    e.preventDefault();
+    //    intervalId = setInterval(poll, 2000, 123);//id 123
+    //});
+
+    // Polling End
+
+    /******************************************long Polling***********************************************************************/
+
+    // long Polling Start
+
+    //pollWithTimeout = (url, options, timeout = 9000) => {
+    //    return Promise.race([
+    //        fetch(url, options),
+    //        new Promise((_, reject) =>
+    //            setTimeout(() => reject(new error('timeout'), timeout))
+    //        )
+
+    //    ]);
+
+    //};
+
+    // poll = (id) => {
+    //     pollWithTimeout('/Test/Get/' + id)
+    //         .then(response => {
+    //             if (response.status == 200) {
+    //                 response.json().then(j => {
+    //                     const resultDiv = document.getElementById("result");
+    //                     resultDiv.innerHTML = j.count;
+    //                     if (!j.finished) {
+    //                         poll(id);
+    //                     }
+
+    //                 })
+    //             }
+
+    //         })
+    //         .catch(response => poll(id));
+    // };
+
+    // document.getElementById("btn").addEventListener("click", e => {
+    //    e.preventDefault();
+    //     poll(123);//id 123
+    //});
+    // long Polling End
+
+
+    /***************************************** Server Sent Events (SSE) *****************************************/
+    // SSE Start
+
+    //listen = (id) => {
+    //    const eventSource = new EventSource('/Test/Get/' + id);
+    //    eventSource.onmessage = (event) => {
+    //        const resultDiv = document.getElementById("result");
+    //        console.log(event.data);
+    //        resultDiv.innerHTML = event.data;
+    //    };
+    //    eventSource.onerror = function (e) {
+    //        console.log("EventSource failed",e);
+    //    }
+    //};
+    //document.getElementById("btn").addEventListener("click", e => {
+    //    e.preventDefault();
+    //    listen(123);//id 123
+    //});
+
+    // SSE End
+
+
+
+    /*****************************************Web Socket*********************************************/
+    //Web Socket Start
+
+    listen = (id) => {
+        const socket = new WebSocket('ws://localhost:52592/Test/Get/' + id);
+        socket.onmessage = event => {
+
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = JSON.parse(event.data).count;
+
+        };
+    };
+    document.getElementById("btn").addEventListener("click", e => {
+        e.preventDefault();
+        listen(123);//id 123
+    });
+
+
+
+    //Web Socket End
+
+</script>

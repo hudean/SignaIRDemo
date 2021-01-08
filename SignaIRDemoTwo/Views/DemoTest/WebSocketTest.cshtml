@@ -1,0 +1,25 @@
+﻿<div class="text-center">
+    <h1 class="display-4">Test</h1>
+    <div>
+        <button id="btn" type="submit">开始Polling</button>
+        结果<span id="result" style="color:red;font-weight:bolder"></span>
+    </div>
+
+</div>
+<script>
+
+
+    listen = (id) => {
+        const socket = new WebSocket('ws://localhost:52136/DemoTest/WebSocketGet?id=' + id);
+        socket.onmessage = event => {
+            var resultDiv = document.getElementById("result");
+            console.log(event.data);
+            resultDiv.innerHTML = JSON.parse(event.data).count;
+        }
+    };
+    document.getElementById("btn").addEventListener("click", e => {
+        e.preventDefault();
+        listen(123);//id 123
+    });
+
+</script>

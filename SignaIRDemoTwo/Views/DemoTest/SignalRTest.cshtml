@@ -1,0 +1,40 @@
+﻿<button id="submit">提交</button>
+<div id="result" style="color:green;font-weight:bold;"></div>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+
+<script>
+        var connection = new signalR.HubConnectionBuilder().withUrl("/DemoTest").build();
+
+    connection.on("someFunc", function (obj) {
+        var resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = "Someone called this ,parameters: " + obj.random;
+    });
+    connection.on("ReceiveMessage", function (update) {
+        var resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = update;
+    });
+    connection.on("Finished", function () {
+        connection.stop();
+        var resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = "Finished";
+    });
+    //connection.start().catch(err => console.error(err.toString()));
+    connection.start().then(function () {
+    }).catch(function (err) {
+        return console.error(err.toString());
+    });
+
+
+
+    document.getElementById("submit").addEventListener("click", e => {
+        e.preventDefault();
+        fetch("/DemoTest/SignalRPost", { method: "post" })
+            .then(Response => Response.text())
+            .then(id => connection.invoke("GetLastedCount", id));//id 是1
+
+        //connection.invoke("GetLastCountTest", "sss").catch(function (err) {
+        //    return console.error(err.toString());
+        //});
+
+    })
+</script>

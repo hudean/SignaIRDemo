@@ -1,0 +1,27 @@
+﻿<div class="text-center">
+    <h1 class="display-4">Test</h1>
+    <div>
+        <button id="btn" type="submit">开始Polling</button>
+        结果<span id="result" style="color:red;font-weight:bolder"></span>
+    </div>
+
+</div>
+<script>
+
+    listen = (id) => {
+        const eventSource = new EventSource('/DemoTest/SSEGet?id=' + id);
+        eventSource.onmessage = (event) => {
+            const resultDiv = document.getElementById("result");
+            console.log(event.data);
+            resultDiv.innerHTML = event.data;
+        };
+        eventSource.onerror = function (e) {
+            console.log("EventSource failed",e);
+        }
+    };
+    document.getElementById("btn").addEventListener("click", e => {
+        e.preventDefault();
+        listen(123);//id 123
+    });
+
+</script>
